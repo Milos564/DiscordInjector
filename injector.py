@@ -1,4 +1,4 @@
-import itertools, time, sys, os
+import time, sys, os, getpass
 from colorama import Fore
 
 def clear():
@@ -9,6 +9,8 @@ def clear():
     else:
         os.system('clear')
 
+
+username = getpass.getuser()
 success = f'{Fore.GREEN}[✓]{Fore.WHITE}'
 error = f'{Fore.RED}[✗]{Fore.WHITE}'
 log = f'{Fore.YELLOW}[*]{Fore.WHITE}'
@@ -19,7 +21,7 @@ detect_versions = lambda discordpath,idxsubpath: [
 
 if sys.platform == 'darwin':
     clear()
-    print(f'{success} HellCord Detected A OS X Machine')
+    print(f'{success} Detected A OS X Machine')
     baseclients = {
     'STABLE' : detect_versions('/Users/%s/Library/Application Support/discord/'%username, '/modules/discord_desktop_core/index.js'),
     'CANARY' : detect_versions('/Users/%s/Library/Application Support/discordcanary/'%username, '/modules/discord_desktop_core/index.js'),
@@ -27,7 +29,7 @@ if sys.platform == 'darwin':
 }
 elif os.name == 'nt':
     clear()
-    print(f'{success} HellCord Detected A Windows Machine')
+    print(f'{success} Detected A Windows Machine')
     baseclients = {
         'STABLE' : detect_versions('C:/Users/%s/AppData/Roaming/Discord/'%username, '/modules/discord_desktop_core/index.js'),
         'CANARY' : detect_versions('C:/Users/%s/AppData/Roaming/discordcanary/'%username, '/modules/discord_desktop_core/index.js'),
@@ -35,7 +37,7 @@ elif os.name == 'nt':
 }
 else:
     clear()
-    print(f'{success} HellCord Detected A Linux Machine')
+    print(f'{success} Detected A Linux Machine')
     baseclients = {
         'STABLE' : detect_versions('/home/%s/.config/discord/'%username, '/modules/discord_desktop_core/index.js'),
         'CANARY' : detect_versions('/home/%s/.config/discordcanary/'%username, '/modules/discord_desktop_core/index.js'),
@@ -67,7 +69,7 @@ def home():
     print(f'Install Location  :  {getclient("2")[1]}\n')
     install = input('Inject Into Index.js? (y/n) ')
     if install.lower() == 'y':
-        print('Installing HellCord')
+        print('Installing ')
         inject(getclient("2")[1])
     elif install.lower() == 'n':
         print('Cancled')
@@ -77,5 +79,7 @@ def home():
 
 clients = [ (str(i+1),cpv) for i,cpv in enumerate( (c,p,v) for c in baseclients if baseclients[c] for p,v in baseclients[c] ) ]
 getclient = dict(clients).get
+
 time.sleep(5)
+
 home()
