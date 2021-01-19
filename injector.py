@@ -46,7 +46,7 @@ else:
     
 
 def inject(location):
-    print(f'Now injecting HellCord into {location}')
+    print(f'Now injecting into {location}')
     injectionFile = 'injection.js'
     index = open(location, 'a')
     try:
